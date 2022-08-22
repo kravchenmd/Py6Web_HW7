@@ -18,7 +18,7 @@ def run_client(ip: str, port: int):
         while message.lower().strip() != 'end':
             client_socket.send(message.encode())
             data = client_socket.recv(1024).decode()
-            print(f'received message: {data}')
+            print(f'Received message: {data}')
             if data == 'OK':
                 continue
             while not (message := input('--> ')):

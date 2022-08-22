@@ -38,7 +38,7 @@ def run_server(ip, port):
             if not data:
                 break
 
-            print(f'received message form {sock.getsockname()}: {data}')
+            print(f'Received message form {sock.getsockname()}: {data}')
             while not (message := input('--> ')):
                 print("Enter not empty message!")
             sock.send(message.encode())
