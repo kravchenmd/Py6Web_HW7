@@ -10,16 +10,21 @@ def run_client(ip: str, port: int):
         client_socket = socket.socket()
         client_socket.connect(server)
         print(f"Connection with server @ {server} was established")
-        message = input('--> ')
-        client_socket.send(message.encode())
-        data = client_socket.recv(1024).decode()
+        message = ''
 
-        while data != 'OK':
+        while not (message := input('--> ')):
+            print("Enter not empty message!")
+
+        while message.lower().strip() != 'end':
+            client_socket.send(message.encode())
             data = client_socket.recv(1024).decode()
-            if not data:
-                print("ERROR: connection was closed, but `OK` wasn't received!")
-                return
-        print(data)
+            print(f'received message: {data}')
+            if data == 'OK':
+                continue
+            while not (message := input('--> ')):
+                print("Enter not empty message!")
+
+        client_socket.close()
     print(f"Connection with server was closed")
 
 

@@ -34,14 +34,14 @@ def run_server(ip, port):
     def handle(sock: socket.socket, addr: str):
         print(f'Connection established {addr}')
         while True:
-            received = sock.recv(1024)
-            if not received:
+            data = sock.recv(1024).decode()
+            if not data:
                 break
-            data = received.decode()
-            print(f'Data received: {data}')
-            sock.send('OK'.encode())
-            print(f'OK was send to {addr}. Connection closed')
-            sock.close()
+
+            print(f'received message form {sock.getsockname()}: {data}')
+            while not (message := input('--> ')):
+                print("Enter not empty message!")
+            sock.send(message.encode())
 
     server_socket = socket.socket()
     server_socket.bind((ip, port))
