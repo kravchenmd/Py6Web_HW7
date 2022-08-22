@@ -9,7 +9,7 @@ def run_client(ip: str, port: int):
         server = ip, port
         client_socket = socket.socket()
         client_socket.connect(server)
-        print(f"Connection with server @ {server} was established")
+        print(f"Connection with server @ {server} was created")
         message = ''
 
         while not (message := input('--> ')):

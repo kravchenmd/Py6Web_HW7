@@ -32,7 +32,7 @@ def get_ip():
 
 def run_server(ip, port):
     def handle(sock: socket.socket, addr: str):
-        print(f'Connection established {addr}')
+        print(f'Connection with {addr} created')
         while True:
             data = sock.recv(1024).decode()
             if not data:
